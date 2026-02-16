@@ -83,7 +83,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'inventory_management_db',
         'USER': 'postgres',          # or your pg username
-        'PASSWORD': 'system', # your pg password
+        'PASSWORD': '', # your pg password
         'HOST': 'localhost',
         'PORT': '5432',
     }
