@@ -53,6 +53,17 @@ class LoginAPIView(APIView):
 
         user = UserMasters.objects.filter(mobile=mobile).first()
 
+        print("Entered Mobile:", mobile)
+        print("Entered Password:", password)
+
+        if user:
+            print("DB Mobile:", user.mobile)
+            print("DB Password:", user.password)
+        else:
+            print("User not found")
+
+        user = UserMasters.objects.filter(mobile=mobile).first()
+
         if not user or user.password.strip() != password:
             return Response(
                 {'message': 'Invalid mobile or password'},
