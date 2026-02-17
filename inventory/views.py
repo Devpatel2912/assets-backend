@@ -20,6 +20,25 @@ from .models import ProductImageMasters, ProductMasters
 from .models import DeptMasters
 from .serializers import DepartmentListSerializer
 
+
+
+
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from inventory.models import UserMasters
+
+@api_view(['POST'])
+def create_test_user(request):
+    user = UserMasters.objects.create(
+        name="Admin",
+        mobile="9099929109",
+        password="369369",
+        role="admin"
+    )
+    return Response({"message": "User created"})
+
+
+
 class LoginAPIView(APIView):
 
     def post(self, request):
