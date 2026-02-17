@@ -9,7 +9,6 @@ class UserMasters(models.Model):
 
     class Meta:
         db_table = 'user_masters'
-        managed = False
 
 
 class DeptMasters(models.Model):
@@ -18,7 +17,7 @@ class DeptMasters(models.Model):
 
     class Meta:
         db_table = 'dept_masters'
-        managed = False
+       
 
 
 class CategoryMasters(models.Model):
@@ -27,7 +26,7 @@ class CategoryMasters(models.Model):
 
     class Meta:
         db_table = 'category_msters'
-        managed = False
+
 
 
 class ProductMasters(models.Model):
@@ -43,7 +42,7 @@ class ProductMasters(models.Model):
 
     class Meta:
         db_table = 'product_masters'
-        managed = False
+       
 
 
 class StorageMasters(models.Model):
@@ -58,7 +57,7 @@ class StorageMasters(models.Model):
 
     class Meta:
         db_table = 'storage_masters'
-        managed = False
+       
 
 class ProductImageMasters(models.Model):
     id = models.AutoField(primary_key=True)
@@ -68,8 +67,7 @@ class ProductImageMasters(models.Model):
 
     class Meta:
         db_table = 'productimage_masters'
-        managed = False
-
+        
 class DeptMasters(models.Model):
     did = models.AutoField(primary_key=True)
     name = models.CharField(max_length=255)
@@ -81,7 +79,7 @@ class DeptMasters(models.Model):
 
     class Meta:
         db_table = 'dept_masters'
-        managed = False
+     
 
 class LocationMasters(models.Model):
     lid = models.AutoField(primary_key=True)
@@ -94,4 +92,4 @@ class LocationMasters(models.Model):
 
     class Meta:
         db_table = 'location_masters'
-        managed = False
+   
