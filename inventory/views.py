@@ -1,7 +1,6 @@
 import jwt
 from django.conf import settings
 from rest_framework.views import APIView
-from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
 from .models import UserMasters
@@ -21,54 +20,19 @@ from .models import ProductImageMasters, ProductMasters
 from .models import DeptMasters
 from .serializers import DepartmentListSerializer
 
-
-
-
-from rest_framework.decorators import api_view
-from rest_framework.response import Response
-from inventory.models import UserMasters
-
-@api_view(['POST'])
-def force_create_user(request):
-    user, created = UserMasters.objects.get_or_create(
-        mobile="9099929109",
-        defaults={
-            "name": "Admin",
-            "password": "369369",
-            "role": "admin"
-        }
-    )
-    return Response({"message": "User created"})
-
-
-
-
-
 class LoginAPIView(APIView):
 
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
-
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        mobile = serializer.validated_data['mobile'].strip()
-        password = serializer.validated_data['password'].strip()
+        mobile = serializer.validated_data['mobile']
+        password = serializer.validated_data['password']
 
-        user = UserMasters.objects.filter(mobile=mobile).first()
-
-        print("Entered Mobile:", mobile)
-        print("Entered Password:", password)
-
-        if user:
-            print("DB Mobile:", user.mobile)
-            print("DB Password:", user.password)
-        else:
-            print("User not found")
-
-        user = UserMasters.objects.filter(mobile=mobile).first()
-
-        if not user or user.password.strip() != password:
+        try:
+            user = UserMasters.objects.get(mobile=mobile, password=password)
+        except UserMasters.DoesNotExist:
             return Response(
                 {'message': 'Invalid mobile or password'},
                 status=status.HTTP_401_UNAUTHORIZED
