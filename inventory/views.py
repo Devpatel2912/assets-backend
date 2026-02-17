@@ -44,15 +44,16 @@ class LoginAPIView(APIView):
 
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
+
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        mobile = serializer.validated_data['mobile']
-        password = serializer.validated_data['password']
+        mobile = serializer.validated_data['mobile'].strip()
+        password = serializer.validated_data['password'].strip()
 
-        try:
-            user = UserMasters.objects.get(mobile=mobile, password=password)
-        except UserMasters.DoesNotExist:
+        user = UserMasters.objects.filter(mobile=mobile).first()
+
+        if not user or user.password.strip() != password:
             return Response(
                 {'message': 'Invalid mobile or password'},
                 status=status.HTTP_401_UNAUTHORIZED
