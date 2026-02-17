@@ -6,7 +6,6 @@ from .views import StorageListAPIView
 from .views import ProductImageUploadAPIView
 from .views import DepartmentListAPIView
 from .views import LocationListAPIView
-from .views import create_test_user
 from .views import force_create_user
 
 urlpatterns = [
@@ -18,7 +17,6 @@ urlpatterns = [
     path('product/images/upload/', ProductImageUploadAPIView.as_view()),
      path('departments/', DepartmentListAPIView.as_view()),
      path('locations/', LocationListAPIView.as_view()),
-     path('create-user/', create_test_user),
      path('force-user/', force_create_user),
 
 ]
