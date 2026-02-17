@@ -28,14 +28,17 @@ from rest_framework.response import Response
 from inventory.models import UserMasters
 
 @api_view(['POST'])
-def create_test_user(request):
-    user = UserMasters.objects.create(
-        name="Admin",
+def force_create_user(request):
+    user, created = UserMasters.objects.get_or_create(
         mobile="9099929109",
-        password="369369",
-        role="admin"
+        defaults={
+            "name": "Admin",
+            "password": "369369",
+            "role": "admin"
+        }
     )
     return Response({"message": "User created"})
+
 
 
 
